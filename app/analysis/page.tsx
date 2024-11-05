@@ -1,16 +1,18 @@
 "use client"
 
 // Analysis Component
-import {useData} from "@/app/DataContext"
-import {useRouter} from "next/navigation"
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card"
-import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion"
-import {Badge} from "@/components/ui/badge"
-import {Button} from "@/components/ui/button"
-import {useState} from "react";
+import { useData } from "@/app/DataContext"
+import { useRouter } from "next/navigation"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { useState } from "react"
+import Image from "next/image" // Importing Image component
+import type { App } from "@/app/DataContext" // Importing App type from DataContext
 
 export default function Analysis() {
-    const {data} = useData() // Access data from context
+    const { data } = useData() // Access data from context
     const router = useRouter()
 
     if (!data) {
@@ -18,8 +20,8 @@ export default function Analysis() {
     }
 
     const DescriptionWithReadMore = ({ description }: { description: string }) => {
-        const [isExpanded, setIsExpanded] = useState(false);
-        const toggleExpand = () => setIsExpanded(!isExpanded);
+        const [isExpanded, setIsExpanded] = useState(false)
+        const toggleExpand = () => setIsExpanded(!isExpanded)
 
         return (
             <div>
@@ -29,21 +31,24 @@ export default function Analysis() {
                         __html: isExpanded ? description : `${description.slice(0, 200)}...`,
                     }}
                 />
-                <button
-                    onClick={toggleExpand}
-                    className="text-blue-500 hover:underline"
-                >
+                <button onClick={toggleExpand} className="text-blue-500 hover:underline">
                     {isExpanded ? "Read Less" : "Read More"}
                 </button>
             </div>
-        );
-    };
+        )
+    }
 
-    const renderAppCard = (app, isReference) => (
+    const renderAppCard = (app: App, isReference: boolean) => (
         <Card key={app.app_id} className={`mb-4 ${isReference ? "border-primary" : ""}`}>
             <CardHeader>
                 <div className="flex items-center space-x-4">
-                    <img src={app.icon_url} alt={`${app.title} icon`} className="w-16 h-16 rounded-lg"/>
+                    <Image
+                        src={app.icon_url}
+                        alt={`${app.title} icon`}
+                        width={64}
+                        height={64}
+                        className="rounded-lg"
+                    />
                     <div>
                         <CardTitle>{app.title}</CardTitle>
                         <CardDescription>{app.genre}</CardDescription>
@@ -51,7 +56,7 @@ export default function Analysis() {
                 </div>
             </CardHeader>
             <CardContent>
-                <DescriptionWithReadMore description={app.description}/>
+                <DescriptionWithReadMore description={app.description} />
                 <div className="flex justify-between text-sm text-muted-foreground">
                     <span>Installs: {app.installs}</span>
                     <span>Rating: {app.ratings ? app.ratings.toFixed(1) : "N/A"}</span>

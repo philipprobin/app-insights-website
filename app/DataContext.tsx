@@ -10,7 +10,7 @@ type Insight = {
     title: string;
 };
 
-type App = {
+export type App = {
     app_id: string;
     description: string;
     genre: string;
