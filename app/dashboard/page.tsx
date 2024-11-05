@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { onAuthStateChanged } from "firebase/auth"
+import {onAuthStateChanged, User} from "firebase/auth"
 import { auth, db } from "@/lib/firebase"
 import { AuthPage } from "@/app/auth-page/page"
 import { collection, doc, getDoc, getDocs } from "firebase/firestore"
@@ -21,7 +21,7 @@ type AnalysisPreview = {
 export default function Dashboard() {
     const [appId, setAppId] = useState("")
     const [country, setCountry] = useState("")
-    const [user, setUser] = useState<any>(null)
+    const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true)
     const [previousAnalyses, setPreviousAnalyses] = useState<AnalysisPreview[]>([])
     const { setData } = useData() // Access setData from context
