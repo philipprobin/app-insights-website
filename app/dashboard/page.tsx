@@ -8,7 +8,7 @@ import { Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import {onAuthStateChanged, User} from "firebase/auth"
 import { auth, db } from "@/lib/firebase"
-import { AuthPage } from "@/app/auth-page/page"
+import AuthPage from "@/app/auth-page/page"
 import { collection, doc, getDoc, getDocs } from "firebase/firestore"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { useData, AppInsightsData } from "@/app/DataContext" // Import types
