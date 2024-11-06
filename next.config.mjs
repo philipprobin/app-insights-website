@@ -9,7 +9,14 @@ const nextConfig = {
         ];
     },
     images: {
-        domains: ['play-lh.googleusercontent.com'],
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'play-lh.googleusercontent.com',
+                port: '',
+                pathname: '/**', // Match all paths under this hostname
+            },
+        ],
     },
 };
 

@@ -86,11 +86,14 @@ export default function Analysis() {
 
     return (
         <div className="container mx-auto p-4">
-            <Button onClick={() => router.back()}>Back to Dashboard</Button>
-            <div>
-                <h2 className="text-2xl font-semibold mb-4">Reference App</h2>
+            <div className="flex justify-between items-center py-4">
+                <h2 className="text-2xl font-semibold">App Insights Analysis</h2>
+                <Button onClick={() => router.back()}>Back to Dashboard</Button>
+            </div>
+            <div className="mt-8">
+                <h3 className="text-xl font-semibold mb-4">Reference App</h3>
                 {renderAppCard(data.reference_app, true)}
-                <h2 className="text-2xl font-semibold my-4">Competitors</h2>
+                <h3 className="text-xl font-semibold my-4">Competitors</h3>
                 {data.competitors.map(app => renderAppCard(app, false))}
             </div>
         </div>
